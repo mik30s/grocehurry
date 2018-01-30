@@ -1,5 +1,7 @@
 package com.example.owner.grocehurry;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
     private EditText username, password;
     private Button loginBtn, createAccountBtn, skipBtn;
+    private final  AccountDatabaseHelper accountDatabaseHelper
+            = new AccountDatabaseHelper(getApplicationContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createAccount() {
-
+        SQLiteDatabase db = accountDatabaseHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put();
+        db.insert(values);
     }
 
     public void skipLogin() {
