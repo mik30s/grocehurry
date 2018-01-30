@@ -46,10 +46,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createAccount() {
-        SQLiteDatabase db = accountDatabaseHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put();
-        db.insert(values);
     }
 
     public void skipLogin() {
