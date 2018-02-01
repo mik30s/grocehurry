@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "411035938503",
+    "firebase_url": "https://grocehurry2.firebaseio.com",
+    "project_id": "grocehurry2",
+    "storage_bucket": "grocehurry2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411035938503:android:65b4e18b7867975c",
+        "android_client_info": {
+          "package_name": "com.example.owner.grocehurry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411035938503-s8t084s0h7fueuo3p3gec3vsg6lb4g3b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.owner.grocehurry",
+            "certificate_hash": "de02ae083b6b50445eaf7edd5df26ba117c1e2a6"
+          }
+        },
+        {
+          "client_id": "411035938503-12j99q85tbavf844o4flhgf33kr7j9mk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG-MZts_YHiDP1tH0XRAAH9zQpnrzhCwc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411035938503-12j99q85tbavf844o4flhgf33kr7j9mk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
