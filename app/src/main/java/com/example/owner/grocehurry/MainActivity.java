@@ -2,22 +2,37 @@ package com.example.owner.grocehurry;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
+    private FirebaseAuth auth;
     private EditText username, password;
     private Button loginBtn, createAccountBtn, skipBtn;
-    private final  AccountDatabaseHelper accountDatabaseHelper
-            = new AccountDatabaseHelper(getApplicationContext());
+
+    @Override
+    public void onStart() {
+        super.onStart();
+         //FirebaseUser currentUser = auth.getCurrentUser();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        auth = FirebaseAuth.getInstance();
 
         skipBtn = findViewById(R.id.skipBtn);
         loginBtn = findViewById(R.id.loginBtn);
@@ -46,6 +61,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createAccount() {
+        String user = username.getText().toString();
+        String pass = password.getText().toString();
+        auth.createUserWithEmailAndPassword(user, pass)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            Log.d("LOGIN","create user done!" );
+                        } else {
+                            Log.w("LOGIN", "create user done!");
+                        }
+                    }
+                });
     }
 
     public void skipLogin() {
