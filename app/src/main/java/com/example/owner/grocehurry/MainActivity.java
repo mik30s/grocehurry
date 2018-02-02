@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,23 +58,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login() {
+        String user = username.getText().toString();
+        String pass = password.getText().toString();
+        auth.signInWithEmailAndPassword(user, pass)
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        FirebaseUser user = auth.getCurrentUser();
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                    }
 
+                    // ...
+                }
+            });
     }
 
     public void createAccount() {
         String user = username.getText().toString();
         String pass = password.getText().toString();
         auth.createUserWithEmailAndPassword(user, pass)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            Log.d("LOGIN","create user done!" );
-                        } else {
-                            Log.w("LOGIN", "create user done!");
-                        }
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()) {
+                        Log.d("LOGIN","create user done!" );
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "New account created!",
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "Account already Exists!",
+                                Toast.LENGTH_LONG).show();
                     }
-                });
+                }
+            });
     }
 
     public void skipLogin() {
