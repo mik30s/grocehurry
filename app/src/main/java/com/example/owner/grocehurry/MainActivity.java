@@ -1,6 +1,7 @@
 package com.example.owner.grocehurry;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -103,6 +104,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void skipLogin() {
-
+        startActivity(new Intent(this,ShoppingActivity.class));
     }
 }
