@@ -2,10 +2,9 @@ package com.example.owner.grocehurry;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,7 +27,11 @@ public class ShoppingActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        );
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -46,6 +49,33 @@ public class ShoppingActivity extends AppCompatActivity
                                        .add(R.id.frame_layout,barCodeFrag)
                                        .commit();
         }
+    }
+
+    public void selectDrawItem(MenuItem item) {
+        Fragment fragment = null;
+        Class fragmentClass = BarCodeScannerFragment.class;
+
+        switch(item.getItemId()) {
+            case R.id.nav_bar_code_scanner:
+                fragmentClass = BarCodeScannerFragment.class;
+                break;
+            case R.id.nav_shopping_list:
+                fragmentClass = ShoppingListFragment.class;
+                break;
+            default: break;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_layout, fragment);
+
+        item.setChecked(true);
+        setTitle(item.getTitle());
     }
 
     @Override
@@ -97,6 +127,7 @@ public class ShoppingActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        selectDrawItem(item);
         return true;
     }
 
